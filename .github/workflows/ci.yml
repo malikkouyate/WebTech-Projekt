@@ -13,5 +13,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: 16
+      - name: -x
+      - run: chmod +x gradlew
       - name: clean build
-        run: ./gradlew.bat clean test --info --stacktrace
+        run: ./gradlew clean test --info --stacktrace
