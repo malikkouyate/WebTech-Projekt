@@ -1,6 +1,6 @@
 package htw.berlin.webtech.demo.web.api;
 
-public class ObjectCreateRequest {
+public class ObjectManipulationRequest {
 
 
         private String objectName;
@@ -8,7 +8,7 @@ public class ObjectCreateRequest {
         private String link;
 
 
-        public ObjectCreateRequest(long id, String objectName, int price, String link) {
+        public ObjectManipulationRequest(long id, String objectName, int price, String link) {
 
             this.objectName = objectName;
             this.price = price;
