@@ -20,7 +20,7 @@ public class ObjectRestController {
 
     @GetMapping(path = "/api/v1/objects")
      public ResponseEntity<List<Object>> collectObjects() {
-        var objects = objectService.findAll();
-        return ResponseEntity.ok(objects);
+        return ResponseEntity.ok(objectService.findAll());
     }
+
 }
