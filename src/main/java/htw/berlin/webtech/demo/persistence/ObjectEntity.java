@@ -23,8 +23,7 @@ public class ObjectEntity {
 
 
 
-    public ObjectEntity(long id, String objectName, int price, String link) {
-        this.id = id;
+    public ObjectEntity( String objectName, int price, String link) {
         this.objectName = objectName;
         this.price = price;
         this.link = link;

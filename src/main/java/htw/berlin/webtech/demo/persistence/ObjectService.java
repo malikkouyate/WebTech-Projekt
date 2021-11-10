@@ -3,6 +3,7 @@ package htw.berlin.webtech.demo.persistence;
 import htw.berlin.webtech.demo.persistence.ObjectEntity;
 import htw.berlin.webtech.demo.persistence.ObjectRepository;
 import htw.berlin.webtech.demo.web.api.Object;
+import htw.berlin.webtech.demo.web.api.ObjectCreateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,4 +27,26 @@ public class ObjectService {
                     objectEntity.getLink())
             ).collect(Collectors.toList());
     }
+
+    public Object  findById(Long id) {
+        var objectEntity = objectRepository.findById(id);
+        return objectEntity.isPresent()? transformEntity(objectEntity.get()) : null;
+    }
+
+    public Object create(ObjectCreateRequest request){
+        var objectEntity = new ObjectEntity(request.getObjectName(), request.getPrice(), request.getLink());
+        objectEntity = objectRepository.save(objectEntity);
+        return transformEntity(objectEntity);
+
+    }
+
+
+     private Object transformEntity (ObjectEntity objectEntity){
+        return new Object (
+                objectEntity.getId(),
+                objectEntity.getObjectName(),
+                objectEntity.getPrice(),
+                objectEntity.getLink()
+        );
+     }
 }
