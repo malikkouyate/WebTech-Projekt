@@ -1,5 +1,7 @@
-package htw.berlin.webtech.demo.persistence;
+package htw.berlin.webtech.demo.service;
 
+import htw.berlin.webtech.demo.persistence.ObjectEntity;
+import htw.berlin.webtech.demo.persistence.ObjectRepository;
 import htw.berlin.webtech.demo.web.api.Object;
 import htw.berlin.webtech.demo.web.api.ObjectManipulationRequest;
 import org.springframework.stereotype.Service;
@@ -52,6 +54,15 @@ public class ObjectService {
         objectRepository.save(objectEntity);
 
         return transformEntity(objectEntity);
+    }
+
+    public boolean deleteById(Long id) {
+        if (!objectRepository.existsById(id)) {
+            return false;
+        }
+
+        objectRepository.deleteById(id);
+        return true;
     }
 
      private Object transformEntity (ObjectEntity objectEntity){

@@ -1,6 +1,6 @@
 package htw.berlin.webtech.demo.web;
 
-import htw.berlin.webtech.demo.persistence.ObjectService;
+import htw.berlin.webtech.demo.service.ObjectService;
 import htw.berlin.webtech.demo.web.api.Object;
 import htw.berlin.webtech.demo.web.api.ObjectManipulationRequest;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +38,21 @@ public class ObjectRestController {
     }
 
     @PutMapping(path = "/api/v1/objects/{id}")
-    public ResponseEntity<Object> updatePerson (@PathVariable Long id, @RequestBody ObjectManipulationRequest request){
+    public ResponseEntity<Object> updateObject (@PathVariable Long id, @RequestBody ObjectManipulationRequest request){
         var object = objectService.update(id, request);
         return object != null ? ResponseEntity.ok(object) : ResponseEntity.notFound().build();
+    }
+   /* @DeleteMapping(path = "/api/v1/object/{id}")
+
+    public ResponseEntity<Void> deleteObject(@PathVariable Long id) {
+        boolean successful = objectService.deleteById(id);
+        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }*/
+    @RequestMapping (path = "/api/v1/objects/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Void> deleteObject(@PathVariable Long id){
+        boolean successful = objectService.deleteById(id);
+        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
 
