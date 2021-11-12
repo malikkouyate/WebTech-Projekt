@@ -5,10 +5,11 @@ import javax.persistence.*;
 @Entity(name = "objects")
 public class ObjectEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
 
     @Column(name = "object_name", nullable = false)
@@ -20,6 +21,20 @@ public class ObjectEntity {
 
     @Column(name = "link")
     private String link;
+
+    public ObjectEntity(String objectName, int price) {
+        this.objectName = objectName;
+        this.price = price;
+    }
+
+
+
+
+    @Override
+    public String toString(){
+        return "Thing{name='"+ objectName +
+                "', price=" + price + '}';
+    }
 
 
 
@@ -33,10 +48,11 @@ public class ObjectEntity {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
+    public void  setId(Long id){ this.id = id;}
 
 
     public String getObjectName() {
