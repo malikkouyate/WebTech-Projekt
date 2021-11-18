@@ -1,4 +1,4 @@
-package htw.berlin.webtech.demo.appuser;
+package htw.berlin.webtech.demo.LoginAndRegistration.appuser;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

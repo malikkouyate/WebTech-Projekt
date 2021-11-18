@@ -1,4 +1,4 @@
-package htw.berlin.webtech.demo.appuser;
+package htw.berlin.webtech.demo.LoginAndRegistration.appuser;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
