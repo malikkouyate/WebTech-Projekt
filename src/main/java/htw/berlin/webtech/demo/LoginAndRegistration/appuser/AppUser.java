@@ -33,8 +33,8 @@ public class AppUser implements UserDetails {
     )
     private Long id;
 
-    private String name;
-    private String username;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
@@ -45,15 +45,15 @@ public class AppUser implements UserDetails {
     private Boolean enabled;
 
 
-    public AppUser(String name,
-                   String username,
+    public AppUser(String firstName,
+                   String lastName,
                    String email,
                    String password,
                    AppUserRole appUserRole,
                    Boolean locked,
                    Boolean enabled) {
-        this.name = name;
-        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
@@ -73,9 +73,17 @@ public class AppUser implements UserDetails {
         return password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
