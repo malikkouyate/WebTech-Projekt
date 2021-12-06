@@ -1,5 +1,8 @@
 package htw.berlin.webtech.demo.LoginAndRegistration.registration;
 
+import htw.berlin.webtech.demo.LoginAndRegistration.appuser.AppUser;
+import htw.berlin.webtech.demo.LoginAndRegistration.appuser.AppUserRole;
+import htw.berlin.webtech.demo.LoginAndRegistration.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +10,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private EmailValidator emailValidator;
+    private final AppUserService appUserService;
+    private final EmailValidator emailValidator;
 
     public String register(RegistrationRequest request) {
 
@@ -17,6 +21,14 @@ public class RegistrationService {
             throw new IllegalStateException("email not valid");
         }
 
-        return "it works";
+        return appUserService.signUpUser(
+                new AppUser(
+                        request.getFirstName(),
+                        request.getLastName(),
+                        request.getEmail(),
+                        request.getPassword(),
+                        AppUserRole.USER
+                )
+        );
     }
 }
