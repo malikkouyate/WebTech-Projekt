@@ -1,9 +1,9 @@
-package htw.berlin.webtech.demo.service;
+package htw.berlin.webtech.demo.Mileston2.service;
 
-import htw.berlin.webtech.demo.persistence.ObjectEntity;
-import htw.berlin.webtech.demo.persistence.ObjectRepository;
-import htw.berlin.webtech.demo.web.api.Object;
-import htw.berlin.webtech.demo.web.api.ObjectManipulationRequest;
+import htw.berlin.webtech.demo.Mileston2.persistence.ObjectEntity;
+import htw.berlin.webtech.demo.Mileston2.persistence.ObjectRepository;
+import htw.berlin.webtech.demo.Mileston2.web.api.Object;
+import htw.berlin.webtech.demo.Mileston2.web.api.ObjectManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

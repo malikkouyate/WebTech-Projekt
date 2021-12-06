@@ -1,4 +1,4 @@
-package htw.berlin.webtech.demo.web.api;
+package htw.berlin.webtech.demo.Mileston2.web.api;
 
 public class Object {
     private long id;

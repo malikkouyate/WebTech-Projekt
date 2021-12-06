@@ -1,8 +1,8 @@
-package htw.berlin.webtech.demo.web;
+package htw.berlin.webtech.demo.Mileston2.web;
 
-import htw.berlin.webtech.demo.service.ObjectService;
-import htw.berlin.webtech.demo.web.api.Object;
-import htw.berlin.webtech.demo.web.api.ObjectManipulationRequest;
+import htw.berlin.webtech.demo.Mileston2.service.ObjectService;
+import htw.berlin.webtech.demo.Mileston2.web.api.Object;
+import htw.berlin.webtech.demo.Mileston2.web.api.ObjectManipulationRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

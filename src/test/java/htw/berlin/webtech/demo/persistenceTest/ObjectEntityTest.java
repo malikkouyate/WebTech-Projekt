@@ -1,6 +1,6 @@
 package htw.berlin.webtech.demo.persistenceTest;
 
-import htw.berlin.webtech.demo.persistence.ObjectEntity;
+import htw.berlin.webtech.demo.Mileston2.persistence.ObjectEntity;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package htw.berlin.webtech.demo.persistence;
+package htw.berlin.webtech.demo.Mileston2.persistence;
 
 import javax.persistence.*;
 
