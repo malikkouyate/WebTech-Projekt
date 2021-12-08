@@ -1,5 +1,9 @@
 package htw.berlin.webtech.demo.LoginAndRegistration.appuser;
 
+import htw.berlin.webtech.demo.LoginAndRegistration.email.EmailSender;
+import htw.berlin.webtech.demo.LoginAndRegistration.email.EmailService;
+import htw.berlin.webtech.demo.LoginAndRegistration.registration.RegistrationRequest;
+import htw.berlin.webtech.demo.LoginAndRegistration.registration.RegistrationService;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationToken;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
@@ -8,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,6 +26,7 @@ public class AppUserService implements UserDetailsService {
     private final AppUserRepository appUserRepository;
     private  final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+
 
     @Override
     public UserDetails loadUserByUsername(String email)
@@ -37,8 +43,10 @@ public class AppUserService implements UserDetailsService {
                 .findByEmail(appUser.getEmail())
                 .isPresent();
 
-        if (userExists){
-            throw new IllegalStateException("Email schon benutzt");
+        if (userExists) {
+
+
+                throw new IllegalStateException("Email schon benutzt");
         }
 
         String encodedPassword = bCryptPasswordEncoder
