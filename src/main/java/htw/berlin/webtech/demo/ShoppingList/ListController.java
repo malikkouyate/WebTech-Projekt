@@ -1,17 +1,14 @@
 package htw.berlin.webtech.demo.ShoppingList;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "api/v1/list")
+@RequestMapping(path = "api/v1/registration/list")
 public class ListController {
 
     private final ListItemService listItemService;
