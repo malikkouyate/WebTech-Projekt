@@ -19,25 +19,25 @@ public class ObjectRestController {
         this.objectService = objectService;
     }
 
-    @GetMapping(path = "/api/v1/objects")
+    @GetMapping(path = "/api/v1/registration/objects")
     public ResponseEntity<List<Object>> collectObjects() {
         return ResponseEntity.ok(objectService.findAll());
     }
 
-    @GetMapping(path = "/api/v1/objects/{id}")
+    @GetMapping(path = "/api/v1/registration/objects/{id}")
     public ResponseEntity<Object> collectObjectbyId(@PathVariable Long id) {
         var object = objectService.findById(id);
         return object != null ? ResponseEntity.ok(object) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping(path = "/api/v1/objects")
+    @PostMapping(path = "/api/v1/registration/objects")
     public ResponseEntity<Void> createObject(@RequestBody ObjectManipulationRequest request) throws URISyntaxException {
         var object = objectService.create(request);
-        URI uri = new URI("/api/v1/objects/" + object.getId());
+        URI uri = new URI("/api/v1/registration/objects/" + object.getId());
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping(path = "/api/v1/objects/{id}")
+    @PutMapping(path = "/api/v1/registration/objects/{id}")
     public ResponseEntity<Object> updateObject (@PathVariable Long id, @RequestBody ObjectManipulationRequest request){
         var object = objectService.update(id, request);
         return object != null ? ResponseEntity.ok(object) : ResponseEntity.notFound().build();
@@ -48,7 +48,7 @@ public class ObjectRestController {
         boolean successful = objectService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }*/
-    @RequestMapping (path = "/api/v1/objects/{id}", method = RequestMethod.DELETE)
+    @RequestMapping (path = "/api/v1/registration/objects/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<Void> deleteObject(@PathVariable Long id){
         boolean successful = objectService.deleteById(id);
