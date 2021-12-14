@@ -8,10 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-//@RestController
-//@Controller
-//@EnableAutoConfiguration
-//@ComponentScan(basePackages = "java/htw/berlin/webtech/demo/web")
 public class DemoApplication {
 
 	public static void main(String[] args) {
