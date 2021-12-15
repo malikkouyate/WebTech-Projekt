@@ -42,7 +42,7 @@ public class ListItemService {
         return "cleared all successfully";
     }
 
-    /*
+    /* Um ausgewä
      public String deleteMultipleListItems(List<ListItem>itemList){
          if (itemList.isEmpty()){
              throw new IllegalStateException("itemlist is empty, please selecet Itemes to delete");
