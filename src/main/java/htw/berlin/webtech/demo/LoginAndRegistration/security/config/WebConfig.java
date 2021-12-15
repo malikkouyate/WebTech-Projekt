@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods("*")
                 .allowedOrigins("http://localhost:3000",
-                        "https://shoppingcartdrip01.herokuapp.com/");
+                        "https://shoppingcart-frontend01.herokuapp.com/");
     }
 }
 

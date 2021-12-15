@@ -16,7 +16,7 @@ public class ObjectManipulationRequest {
         }
 
 
-
+        public ObjectManipulationRequest(){}
 
         public String getObjectName() {
             return objectName;
