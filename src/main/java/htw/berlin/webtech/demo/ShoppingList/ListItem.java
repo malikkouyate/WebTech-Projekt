@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table
 public class ListItem {
+    // Hallo Malik
 
     @SequenceGenerator(
             name = "list_item_sequence",
