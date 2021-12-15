@@ -1,25 +1,20 @@
 package htw.berlin.webtech.demo.ShoppingList;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class ListItemService {
 
     private final ListItemRepository listItemRepository;
 
-    @Autowired
-    public ListItemService(ListItemRepository listItemRepository){
-        this.listItemRepository = listItemRepository;
-    }
 
-    public void addNewItem(ListItem listItem) {
+
+    public void addNewListItem(ListItem listItem) {
         Optional<ListItem> listItemByLink = listItemRepository
                 .findListItemByLink(listItem.getLink());
         if(listItemByLink.isPresent()){
@@ -34,5 +29,27 @@ public class ListItemService {
     }
 
 
+    public void deleteListItem(Long listItemId){
+        boolean exists = listItemRepository.existsById(listItemId);
+        if(!exists){
+            throw new IllegalStateException("Listitem with id " + listItemId + " does not exists");
+        }
+        listItemRepository.deleteById(listItemId);
+    }
+
+    public String clearAllListItems(){
+        listItemRepository.deleteAll();
+        return "cleared all successfully";
+    }
+
+    /* Um ausgewä
+     public String deleteMultipleListItems(List<ListItem>itemList){
+         if (itemList.isEmpty()){
+             throw new IllegalStateException("itemlist is empty, please selecet Itemes to delete");
+         }
+         listItemRepository.deleteAll(itemList);
+         return "deleted successfully";
+     }
+     */
 
 }
