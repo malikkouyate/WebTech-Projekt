@@ -1,24 +1,18 @@
 package htw.berlin.webtech.demo.ShoppingList;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class ListItemService {
 
     private final ListItemRepository listItemRepository;
 
-    @Autowired
-    public ListItemService(ListItemRepository listItemRepository){
-        this.listItemRepository = listItemRepository;
-    }
+
 
     public void addNewListItem(ListItem listItem) {
         Optional<ListItem> listItemByLink = listItemRepository
@@ -43,6 +37,19 @@ public class ListItemService {
         listItemRepository.deleteById(listItemId);
     }
 
+    public String clearAllListItems(){
+        listItemRepository.deleteAll();
+        return "cleared all successfully";
+    }
 
+    /*
+     public String deleteMultipleListItems(List<ListItem>itemList){
+         if (itemList.isEmpty()){
+             throw new IllegalStateException("itemlist is empty, please selecet Itemes to delete");
+         }
+         listItemRepository.deleteAll(itemList);
+         return "deleted successfully";
+     }
+     */
 
 }

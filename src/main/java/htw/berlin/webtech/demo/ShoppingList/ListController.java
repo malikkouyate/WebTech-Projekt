@@ -28,5 +28,16 @@ public class ListController {
         listItemService.deleteListItem(listItemId);
     }
 
+    @DeleteMapping(path = "/deleteAll")
+    public String deleteAllListItems(){
+        return listItemService.clearAllListItems();
+    }
 
+
+    /*
+    @DeleteMapping(path = "/deleteMultiple")
+    public String deleteMultipleListItems(@RequestBody List<ListItem>itemList){
+        return listItemService.deleteMultipleListItems(itemList);
+    }
+     */
 }
