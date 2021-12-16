@@ -49,7 +49,7 @@ public class AppUser implements UserDetails {
                    String email,
                    String password,
                    AppUserRole appUserRole
-                   ) {
+    ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -77,6 +77,8 @@ public class AppUser implements UserDetails {
     public String getLastName() {
         return lastName;
     }
+
+
 
     @Override
     public String getUsername() {
