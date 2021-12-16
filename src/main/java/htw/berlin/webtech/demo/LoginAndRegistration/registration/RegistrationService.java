@@ -22,10 +22,10 @@ public class RegistrationService {
     private final EmailSender emailSender;
 
     public String register(RegistrationRequest request) {
+        boolean isValidEmail = emailValidator.
+                validate(request.getEmail());
 
-        boolean isValidEmail = emailValidator.test(request.getEmail());
-
-        if (!isValidEmail){
+        if (!isValidEmail) {
             throw new IllegalStateException("email not valid");
         }
 
@@ -36,14 +36,17 @@ public class RegistrationService {
                         request.getEmail(),
                         request.getPassword(),
                         AppUserRole.USER
+
                 )
         );
+
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
+        emailSender.send(
+                request.getEmail(),
+                buildEmail(request.getFirstName(), link));
 
         return token;
     }
-
 
     @Transactional
     public String confirmToken(String token) {
@@ -136,5 +139,4 @@ public class RegistrationService {
                 "\n" +
                 "</div></div>";
     }
-
 }

@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = "api/v1/registration/list")
-public class ListController {
+public class ListItemController {
 
     private final ListItemService listItemService;
 

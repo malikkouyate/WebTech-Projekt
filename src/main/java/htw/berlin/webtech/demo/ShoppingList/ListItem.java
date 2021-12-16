@@ -1,8 +1,6 @@
 package htw.berlin.webtech.demo.ShoppingList;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table
 public class ListItem {
-    // Hallo Malik
 
     @SequenceGenerator(
             name = "list_item_sequence",
