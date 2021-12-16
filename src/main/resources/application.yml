@@ -24,10 +24,10 @@ spring:
       mode: always
 
   mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
 
     properties:
       mail:
