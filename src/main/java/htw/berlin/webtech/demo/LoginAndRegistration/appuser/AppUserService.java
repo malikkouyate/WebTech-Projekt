@@ -1,9 +1,5 @@
 package htw.berlin.webtech.demo.LoginAndRegistration.appuser;
 
-import htw.berlin.webtech.demo.LoginAndRegistration.email.EmailSender;
-import htw.berlin.webtech.demo.LoginAndRegistration.email.EmailService;
-import htw.berlin.webtech.demo.LoginAndRegistration.registration.RegistrationRequest;
-import htw.berlin.webtech.demo.LoginAndRegistration.registration.RegistrationService;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationToken;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
@@ -12,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -24,7 +19,7 @@ public class AppUserService implements UserDetailsService {
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found!";
 
     private final AppUserRepository appUserRepository;
-    private  final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
 
@@ -34,19 +29,20 @@ public class AppUserService implements UserDetailsService {
         return appUserRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(
-                                String.format(USER_NOT_FOUND_MSG,email)));
+                                String.format(USER_NOT_FOUND_MSG, email)));
     }
 
 
-    public String signUpUser(AppUser appUser){
+    public String signUpUser(AppUser appUser) {
         boolean userExists = appUserRepository
                 .findByEmail(appUser.getEmail())
                 .isPresent();
 
+
         if (userExists) {
 
+            throw new IllegalStateException("Email schon benutzt");
 
-                throw new IllegalStateException("Email schon benutzt");
         }
 
         String encodedPassword = bCryptPasswordEncoder
@@ -56,7 +52,6 @@ public class AppUserService implements UserDetailsService {
 
         appUserRepository.save(appUser);
 
-
         String token = UUID.randomUUID().toString();
 
         ConfirmationToken confirmationToken = new ConfirmationToken(
@@ -65,7 +60,6 @@ public class AppUserService implements UserDetailsService {
                 LocalDateTime.now().plusMinutes(10),
                 appUser
         );
-
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
         return token;
