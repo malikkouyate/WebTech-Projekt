@@ -1,6 +1,8 @@
 package htw.berlin.webtech.demo.ShoppingList;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +16,14 @@ public class ListItemService {
 
 
 
-    public void addNewListItem(ListItem listItem) {
+    public Object addNewListItem(ListItem listItem) {
         Optional<ListItem> listItemByLink = listItemRepository
                 .findListItemByLink(listItem.getLink());
         if(listItemByLink.isPresent()){
-            throw new IllegalStateException("Link already used");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link already used!");
         }
         listItemRepository.save(listItem);
+        return "Added successfully!";
     }
 
 
@@ -29,12 +32,13 @@ public class ListItemService {
     }
 
 
-    public void deleteListItem(Long listItemId){
+    public Object deleteListItem(Long listItemId){
         boolean exists = listItemRepository.existsById(listItemId);
         if(!exists){
-            throw new IllegalStateException("Listitem with id " + listItemId + " does not exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Listitem with id " + listItemId + " does not exists!");
         }
         listItemRepository.deleteById(listItemId);
+        return "Deleted successfully!";
     }
 
     public String clearAllListItems(){

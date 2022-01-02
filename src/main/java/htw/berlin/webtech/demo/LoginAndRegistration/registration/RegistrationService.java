@@ -7,6 +7,8 @@ import htw.berlin.webtech.demo.LoginAndRegistration.email.EmailSender;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationToken;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,15 +23,17 @@ public class RegistrationService {
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
-    public String register(RegistrationRequest request) {
+    public Object register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.
                 validate(request.getEmail());
 
         if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
-        }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email not valid!");
 
-        String token = appUserService.signUpUser(
+        }
+        //Bad.Request.exception werfen (Error 400 werfen)
+
+        ResponseEntity<String> token = (ResponseEntity<String>) appUserService.signUpUser(
                 new AppUser(
                         request.getFirstName(),
                         request.getLastName(),
@@ -49,14 +53,14 @@ public class RegistrationService {
     }
 
     @Transactional
-    public String confirmToken(String token) {
+    public Object confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
                 .orElseThrow(() ->
                         new IllegalStateException("token not found"));
 
         if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("email already confirmed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email already confirmed!");
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();

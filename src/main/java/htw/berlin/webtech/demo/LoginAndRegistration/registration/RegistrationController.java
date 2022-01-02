@@ -2,6 +2,7 @@ package htw.berlin.webtech.demo.LoginAndRegistration.registration;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,13 +13,13 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public String register(@RequestBody RegistrationRequest request) {
-        return registrationService.register(request);
+    public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
+        return (ResponseEntity<String>) registrationService.register(request);
     }
 
     @GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
+    public ResponseEntity<String> confirm(@RequestParam("token") String token) {
+        return (ResponseEntity<String>) registrationService.confirmToken(token);
     }
 
 }

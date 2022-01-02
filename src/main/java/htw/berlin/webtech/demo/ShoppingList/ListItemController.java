@@ -19,13 +19,13 @@ public class ListItemController {
     }
 
     @PostMapping
-    public void insertListItem(@RequestBody ListItem listItem){
-        listItemService.addNewListItem(listItem);
+    public Object insertListItem(@RequestBody ListItem listItem){
+        return listItemService.addNewListItem(listItem);
     }
 
     @DeleteMapping(path="{listItemId}")
-    public void deleteListItem(@PathVariable("listItemId") Long listItemId){
-        listItemService.deleteListItem(listItemId);
+    public Object deleteListItem(@PathVariable("listItemId") Long listItemId){
+        return listItemService.deleteListItem(listItemId);
     }
 
     @DeleteMapping(path = "/deleteAll")
@@ -34,10 +34,10 @@ public class ListItemController {
     }
 
 
-    /*
-    @DeleteMapping(path = "/deleteMultiple")
-    public String deleteMultipleListItems(@RequestBody List<ListItem>itemList){
-        return listItemService.deleteMultipleListItems(itemList);
-    }
-     */
+
+//    @DeleteMapping(path = "/deleteMultiple")
+//    public String deleteMultipleListItems(@RequestBody List<ListItem>itemList){
+//        return listItemService.deleteMultipleListItems(itemList);
+//    }
+
 }
