@@ -3,8 +3,6 @@ package htw.berlin.webtech.demo.LoginAndRegistration.appuser;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationToken;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,7 +33,7 @@ public class AppUserService implements UserDetailsService {
     }
 
 
-    public Object signUpUser(AppUser appUser) {
+    public String signUpUser(AppUser appUser) {
         boolean userExists = appUserRepository
                 .findByEmail(appUser.getEmail())
                 .isPresent();
@@ -43,7 +41,7 @@ public class AppUserService implements UserDetailsService {
 
         if (userExists) {
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email already used!");
+            throw new IllegalStateException("Email schon benutzt");
 
         }
 
