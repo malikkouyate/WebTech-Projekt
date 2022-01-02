@@ -1,12 +1,16 @@
 package htw.berlin.webtech.demo.ShoppingList;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
 @Table
+@Getter
+@Setter
 public class ListItem {
 
     @SequenceGenerator(
@@ -38,13 +42,6 @@ public class ListItem {
         this.link = link;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getLink() {
-        return link;
-    }
 
     @Override
     public String toString() {

@@ -23,6 +23,14 @@ public class ListItemController {
         return listItemService.addNewListItem(listItem);
     }
 
+    @PutMapping(path = "{listItemId}")
+    public void updateListItem(
+            @PathVariable("listItemId")Long listItemId,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String link){
+        listItemService.updateListItem(listItemId, title, link);
+    }
+
     @DeleteMapping(path="{listItemId}")
     public Object deleteListItem(@PathVariable("listItemId") Long listItemId){
         return listItemService.deleteListItem(listItemId);

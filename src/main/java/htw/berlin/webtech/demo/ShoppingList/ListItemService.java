@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,6 +46,31 @@ public class ListItemService {
     public String clearAllListItems(){
         listItemRepository.deleteAll();
         return "cleared all successfully";
+    }
+
+    @Transactional
+    public void updateListItem(Long listItemId, String title, String link) {
+
+        ListItem listItem = listItemRepository.findById(listItemId)
+                .orElseThrow(() -> new IllegalStateException("Listitem does not exist!"));
+
+        if(title != null &&
+                title.length() > 0 &&
+                !Objects.equals(listItem.getTitle(), title)){
+            listItem.setTitle(title);
+        }
+
+        if (link != null &&
+                link.length() > 0 &&
+                !Objects.equals(listItem.getLink(), link)){
+            Optional<ListItem>listItemOptional = listItemRepository
+                    .findListItemByLink(link);
+            if (listItemOptional.isPresent()){
+                throw new IllegalStateException("link already used");
+            }
+            listItem.setLink(link);
+        }
+
     }
 
     /* Um ausgewä
