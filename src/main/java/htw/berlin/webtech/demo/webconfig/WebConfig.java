@@ -1,4 +1,4 @@
-package htw.berlin.webtech.demo.Mileston2.web;
+package htw.berlin.webtech.demo.webconfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
