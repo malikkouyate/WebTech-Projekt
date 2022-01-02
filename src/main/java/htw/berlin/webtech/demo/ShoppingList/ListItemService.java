@@ -18,12 +18,18 @@ public class ListItemService {
 
 
 
+    // To-Do Exception werfen wenn title oder link fehlt
     public Object addNewListItem(ListItem listItem) {
         Optional<ListItem> listItemByLink = listItemRepository
                 .findListItemByLink(listItem.getLink());
         if(listItemByLink.isPresent()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link already used!");
         }
+
+        if (listItem.getLink().isEmpty() || listItem.getTitle().isEmpty()){
+            throw new IllegalStateException("Body is incomplete");
+        }
+
         listItemRepository.save(listItem);
         return "Added successfully!";
     }
