@@ -7,6 +7,8 @@ import htw.berlin.webtech.demo.LoginAndRegistration.email.EmailSender;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationToken;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +16,11 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+
 public class RegistrationService {
+
+    @Autowired
+    private Environment env;
 
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
@@ -41,7 +47,11 @@ public class RegistrationService {
         );
 
 
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+
+
+
+        String url = env.getProperty("BASE_URL");
+        String link = url + "/api/v1/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
                 buildEmail(request.getFirstName(), link));
