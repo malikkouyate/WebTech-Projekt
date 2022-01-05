@@ -16,5 +16,8 @@ jobs:
       - name: -x
         run: chmod +x gradlew
       - name: clean build
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
         run: ./gradlew clean test --info --stacktrace
 
