@@ -66,7 +66,7 @@ public class ObjectService {
     }
 
      private Object transformEntity (ObjectEntity objectEntity){
-        return new Object (
+        return new Object(
                 objectEntity.getId(),
                 objectEntity.getObjectName(),
                 objectEntity.getPrice(),

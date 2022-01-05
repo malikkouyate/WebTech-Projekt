@@ -1,5 +1,7 @@
 package htw.berlin.webtech.demo.LoginAndRegistration.appuser;
 
+import htw.berlin.webtech.demo.LoginAndRegistration.appuser.AppUser;
+import htw.berlin.webtech.demo.LoginAndRegistration.appuser.AppUserRepository;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationToken;
 import htw.berlin.webtech.demo.LoginAndRegistration.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
