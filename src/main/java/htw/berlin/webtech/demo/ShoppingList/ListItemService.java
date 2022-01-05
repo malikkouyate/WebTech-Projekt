@@ -40,12 +40,13 @@ public class ListItemService {
     }
 
 
-    public Object deleteListItem(Long listItemId){
-        boolean exists = listItemRepository.existsById(listItemId);
-        if(!exists){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Listitem with id " + listItemId + " does not exists!");
+    @Transactional
+    public Object deleteListItem(String link){
+
+        if(listItemRepository.findListItemByLink(link).isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Listitem with link " + link + " does not exists!");
         }
-        listItemRepository.deleteById(listItemId);
+        listItemRepository.deleteListItemByLink(link);
         return "Deleted successfully!";
     }
 
