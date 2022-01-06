@@ -12,10 +12,10 @@ import java.util.Optional;
 @Repository
 public interface ListItemRepository extends JpaRepository<ListItem, Long> {
 
-    @Query("SELECT l FROM ListItem l where l.link = ?1")
-    Optional<ListItem> findListItemByLink(String link);
+    @Query("SELECT l FROM ListItem l where l.title = ?1")
+    Optional<ListItem> findListItemByTitle(String title);
 
     @Modifying
-    @Query("delete from ListItem l where l.link=:link")
-   void deleteListItemByLink(@Param("link")String link);
+    @Query("delete from ListItem l where l.title=:title")
+   void deleteListItemByTitle(@Param("title")String title);
 }

@@ -20,9 +20,9 @@ public class ListItemService {
 
     // To-Do Exception werfen wenn title oder link fehlt
     public Object addNewListItem(ListItem listItem) {
-        Optional<ListItem> listItemByLink = listItemRepository
-                .findListItemByLink(listItem.getLink());
-        if(listItemByLink.isPresent()){
+        Optional<ListItem> listItemByTitle = listItemRepository
+                .findListItemByTitle(listItem.getTitle());
+        if(listItemByTitle.isPresent()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link already used!");
         }
 
@@ -41,12 +41,12 @@ public class ListItemService {
 
 
     @Transactional
-    public Object deleteListItem(String link){
+    public Object deleteListItem(String title){
 
-        if(listItemRepository.findListItemByLink(link).isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Listitem with link " + link + " does not exists!");
+        if(listItemRepository.findListItemByTitle(title).isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Listitem with title " + title + " does not exists!");
         }
-        listItemRepository.deleteListItemByLink(link);
+        listItemRepository.deleteListItemByTitle(title);
         return "Deleted successfully!";
     }
 
@@ -61,21 +61,21 @@ public class ListItemService {
         ListItem listItem = listItemRepository.findById(listItemId)
                 .orElseThrow(() -> new IllegalStateException("Listitem does not exist!"));
 
-        if(title != null &&
-                title.length() > 0 &&
-                !Objects.equals(listItem.getTitle(), title)){
-            listItem.setTitle(title);
-        }
-
-        if (link != null &&
+        if(link != null &&
                 link.length() > 0 &&
                 !Objects.equals(listItem.getLink(), link)){
-            Optional<ListItem>listItemOptional = listItemRepository
-                    .findListItemByLink(link);
-            if (listItemOptional.isPresent()){
-                throw new IllegalStateException("link already used");
-            }
             listItem.setLink(link);
+        }
+
+        if (title != null &&
+                title.length() > 0 &&
+                !Objects.equals(listItem.getTitle(), title)){
+            Optional<ListItem>listItemOptional = listItemRepository
+                    .findListItemByTitle(title);
+            if (listItemOptional.isPresent()){
+                throw new IllegalStateException("title already used");
+            }
+            listItem.setTitle(title);
         }
 
     }

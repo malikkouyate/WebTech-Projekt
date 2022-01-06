@@ -31,9 +31,9 @@ public class ListItemController {
         listItemService.updateListItem(listItemId, title, link);
     }
 
-    @DeleteMapping(path="{link}")
-    public Object deleteListItem(@PathVariable("link") String link){
-        return listItemService.deleteListItem(link);
+    @DeleteMapping(path="{title}")
+    public Object deleteListItem(@PathVariable("title") String title){
+        return listItemService.deleteListItem(title);
     }
 
     @DeleteMapping(path = "/deleteAll")
