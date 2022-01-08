@@ -23,7 +23,7 @@ public class ListItemService {
         Optional<ListItem> listItemByTitle = listItemRepository
                 .findListItemByTitle(listItem.getTitle());
         if(listItemByTitle.isPresent()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link already used!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Title already used!");
         }
 
         if (listItem.getLink().isEmpty() || listItem.getTitle().isEmpty()){
